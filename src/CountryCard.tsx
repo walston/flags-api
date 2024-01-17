@@ -9,9 +9,15 @@ export default function CountryCard({ country }: Props) {
       <div className="details">
         <h3>{country.name}</h3>
         <ul>
-          <li>population: {country.population}</li>
-          <li>region: {country.region}</li>
-          <li>capital: {country.capital}</li>
+          <li>
+            <strong>population:</strong> {country.population}
+          </li>
+          <li>
+            <strong>region:</strong> {country.region}
+          </li>
+          <li>
+            <strong>capital:</strong> {country.capital}
+          </li>
         </ul>
       </div>
     </a>
