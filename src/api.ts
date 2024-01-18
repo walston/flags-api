@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-export function useGetCountryList() {
-  const [response, setResponse] = useState<Country[]>();
+export function useGetCountryList(): Country[] {
+  const [response, setResponse] = useState<Country[]>([]);
 
   useEffect(() => {
     fetch("http://localhost:3001/countries").then(async (res) => {
@@ -16,6 +16,42 @@ export function useGetCountryList() {
    */
   return response;
 }
+
+export function useGetCountryByName(name: string): Country[] {
+  const [response, setResponse] = useState<Country[]>([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/countries?name~=${name}`).then(async (res) => {
+      const countries = (await res.json()) as Country[];
+      setResponse(countries);
+    });
+  }, []);
+
+  return response;
+}
+
+type Flag = { svg: string; png: string };
+type RegionalBlock = { acronym: string; name: string };
+type Currency = { code: string; name: string; symbol: string };
+type Language = {
+  iso639_1: string;
+  iso639_2: string;
+  name: string;
+  nativeName: string;
+};
+
+type TranslationLanguageCode =
+  | "br"
+  | "pt"
+  | "nl"
+  | "hr"
+  | "fa"
+  | "de"
+  | "es"
+  | "fr"
+  | "ja"
+  | "it"
+  | "hu";
 
 export type Country = {
   name: string;
@@ -35,43 +71,12 @@ export type Country = {
   borders: string[];
   nativeName: string;
   numericCode: string;
-  flags: {
-    svg: string;
-    png: string;
-  };
-  currencies: [
-    {
-      code: string;
-      name: string;
-      symbol: string;
-    }
-  ];
-  languages: {
-    iso639_1: string;
-    iso639_2: string;
-    name: string;
-    nativeName: string;
-  }[];
-  translations: {
-    br: string;
-    pt: string;
-    nl: string;
-    hr: string;
-    fa: string;
-    de: string;
-    es: string;
-    fr: string;
-    ja: string;
-    it: string;
-    hu: string;
-  };
   flag: string;
-  regionalBlocs: [
-    {
-      acronym: string;
-      name: string;
-    }
-  ];
+  flags: Flag;
+  currencies: Currency[];
+  languages: Language[];
+  translations: Record<TranslationLanguageCode, string>;
+  regionalBlocs: RegionalBlock[];
   cioc: string;
   independent: boolean;
 };
