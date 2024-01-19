@@ -6,7 +6,9 @@ type Props = { country: Country };
 export default function CountryCard({ country }: Props) {
   return (
     <a className="CountryCard" href={`/country/${country.alpha3Code}`}>
-      <img src={country.flags.svg} alt={`${country.name} flag`} />
+      <picture className="flag">
+        <img src={country.flags.svg} alt={`flag of ${country.name}`} />
+      </picture>
       <div className="details">
         <h3>{country.name}</h3>
         <ul>

@@ -1,14 +1,33 @@
 .CountryCard {
   display: block;
+  background-color: var(--Elements);
   text-decoration: unset;
   color: unset;
   border-radius: 8px;
   box-shadow: 0 3px 8px var(--Shadow);
 }
 
-.CountryCard > img {
+.CountryCard > .flag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+  aspect-ratio: 20/13 ;
+  background-color: var(--Background);
+}
+
+.CountryCard > .flag img {
+  object-fit: cover;
   max-width: 100%;
-  border-bottom: 2px solid var(--Shadow);
+  max-height: 100%;
+}
+
+.CountryCard .details {
+  padding: 0.5em 1em;
+}
+
+.CountryCard ul {
+  list-style: none;
+  padding: 0;
 }
