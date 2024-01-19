@@ -4,12 +4,12 @@ const DATA = require("./data.json");
 
 const app = Express();
 
-app.get("/", function getAll(req, res, next) {
+app.get("/api/countries/", function getAll(req, res, next) {
   const data = DATA;
   res.status(200).json(data);
 });
 
-app.get("/search", function getBy(req, res, next) {
+app.get("/api/countries/search", function getBy(req, res, next) {
   if (req.query["name"]) {
     const fuse = new Fuse(DATA, { keys: ["name"] });
     const finds = fuse.search(req.query.name);
@@ -19,7 +19,7 @@ app.get("/search", function getBy(req, res, next) {
   }
 });
 
-app.get("/:country_code", function getByCountryCode(req, res, next) {
+app.get("/countries/:country_code", function getByCountryCode(req, res, next) {
   const countryCode = req.params.country_code;
   if (!countryCode) return res.status(400).send();
   if (!/^\w{3}$/.test(countryCode)) {

@@ -4,7 +4,7 @@ export function useGetCountryList(): Country[] {
   const [response, setResponse] = useState<Country[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/countries").then(async (res) => {
+    fetch("/api/countries").then(async (res) => {
       const countries = (await res.json()) as Country[];
       setResponse(countries);
     });
@@ -21,11 +21,11 @@ export function useGetCountryByName(name: string): Country[] {
   const [response, setResponse] = useState<Country[]>([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/countries?name~=${name}`).then(async (res) => {
+    fetch(`/api/countries?name=${name}`).then(async (res) => {
       const countries = (await res.json()) as Country[];
       setResponse(countries);
     });
-  }, []);
+  }, [name]);
 
   return response;
 }
