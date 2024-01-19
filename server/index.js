@@ -4,23 +4,24 @@ const DATA = require("./data.json");
 
 const app = Express();
 
-app.get("/api/countries/", function getAll(req, res, next) {
-  const data = DATA;
-  res.status(200).json(data);
-});
+app.get("/api/countries", function getCountries(req, res, next) {
+  let matches = DATA;
 
-app.get("/api/countries/search", function getBy(req, res, next) {
-  if (req.query["name"]) {
-    const fuse = new Fuse(DATA, { keys: ["name"] });
-    const finds = fuse.search(req.query.name);
-    res.status(finds.length > 0 ? 200 : 404).json(finds);
-  } else {
-    next();
+  if (req.query["region"]) {
+    const fuse = new Fuse(matches, { keys: ["region"] });
+    matches = fuse.search(req.query.region);
   }
+
+  if (req.query["name"]) {
+    const fuse = new Fuse(matches, { keys: ["name"] });
+    matches = fuse.search(req.query.name);
+  }
+
+  res.status(matches.length > 0 ? 200 : 404).json(matches);
 });
 
-app.get("/countries/:country_code", function getByCountryCode(req, res, next) {
-  const countryCode = req.params.country_code;
+app.get("/api/countries/:code", function getCountryByCode(req, res, next) {
+  const countryCode = req.params.code;
   if (!countryCode) return res.status(400).send();
   if (!/^\w{3}$/.test(countryCode)) {
     return res.status(400).send("Expected 3 letter country code");

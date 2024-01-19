@@ -1,19 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-export function useGetCountryList(): Country[] {
+type Params = { region?: string; name?: string };
+export function useGetCountryList(params?: Params): Country[] {
   const [response, setResponse] = useState<Country[]>([]);
+  const abort = useRef(new AbortController());
 
   useEffect(() => {
-    fetch("/api/countries").then(async (res) => {
-      const countries = (await res.json()) as Country[];
-      setResponse(countries);
-    });
-  }, []);
+    const url = new URL("/api/countries", window.location.origin);
+    if (params?.name) url.searchParams.set("name", params.name);
+    if (params?.region) url.searchParams.set("region", params.region);
 
-  /**
-   * @NOTE
-   * -- 🚨 Need error handling
-   */
+    fetch(url, { signal: abort.current.signal })
+      .then(async (res) => {
+        const countries = (await res.json()) as Country[];
+        setResponse(countries);
+      })
+      .catch(console.error);
+
+    return () => {
+      abort.current.abort();
+      abort.current = new AbortController();
+    };
+  }, [abort, params]);
   return response;
 }
 
