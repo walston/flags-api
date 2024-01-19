@@ -1,0 +1,14 @@
+.CountryCard {
+  display: block;
+  text-decoration: unset;
+  color: unset;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px var(--Shadow);
+}
+
+.CountryCard > img {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  max-width: 100%;
+  border-bottom: 2px solid var(--Shadow);
+}

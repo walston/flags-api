@@ -1,10 +1,11 @@
 import { Country } from "./api";
+import "./CountryCard.css";
 
 type Props = { country: Country };
 
 export default function CountryCard({ country }: Props) {
   return (
-    <a className="CountryCard" href="🚨 NOTE: NEED URL">
+    <a className="CountryCard" href={`/country/${country.alpha3Code}`}>
       <img src={country.flags.svg} alt={`${country.name} flag`} />
       <div className="details">
         <h3>{country.name}</h3>

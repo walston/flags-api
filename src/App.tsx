@@ -1,5 +1,6 @@
 import { useGetCountryList } from "./api";
 import CountryCard from "./CountryCard";
+import "./App.css";
 
 function App() {
   const countries = useGetCountryList();
