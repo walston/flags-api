@@ -1,6 +1,61 @@
-.App {
+.App header {
+  padding: 35px 75px;
+  display: block;
+  background-color: var(--Elements);
+  display: flex;
+  justify-content: space-between;
+}
+
+.App header h1 {
+  margin: 0;
+}
+
+.App header button {
+  display: block;
+  padding: 0 20px;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: large;
+  cursor: pointer;
+}
+
+.App header button:hover,
+.App header button:focus,
+.App header button:active {
+  opacity: 90%;
+  background-color: var(--Background);
+}
+
+
+.App [role=toolbar] {
+  padding: 75px 75px 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.App [role=toolbar] input[type=search]::before {
+  content: ''
+}
+.App [role=toolbar] input[type=search] {
+  font-size: inherit;
+  padding: 20px 20px 20px 80px;
+}
+
+.App [role=toolbar] select {
+  padding: 20px;
+}
+
+.App [role=grid] {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2em;
-  padding: 2em;
+  gap: 75px;
+  padding: 75px;
+}
+
+@media (max-width: 375px) {
+  .App [role=grid] {
+    grid-template-columns: 1fr;
+  }
 }
