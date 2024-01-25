@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Country } from "./api";
 import "./CountryCard.css";
 
@@ -7,7 +8,7 @@ const formatter = Intl.NumberFormat("en-US");
 
 export default function CountryCard({ country }: Props) {
   return (
-    <a className="CountryCard" href={`/country/${country.alpha3Code}`}>
+    <Link className="CountryCard" to={`/${country.alpha3Code}`}>
       <picture className="flag">
         <img src={country.flags.svg} alt={`flag of ${country.name}`} />
       </picture>
@@ -25,6 +26,6 @@ export default function CountryCard({ country }: Props) {
           </li>
         </ul>
       </div>
-    </a>
+    </Link>
   );
 }

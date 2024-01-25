@@ -1,9 +1,9 @@
 import { useState } from "react";
-
 import { ColorScheme, getUserColorSchemePreference } from "./util";
-
-import "./App.css";
 import CountryGrid from "./CountryGrid";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CountryDetail from "./CountryDetail";
 
 function App() {
   const [mode, setMode] = useState<ColorScheme>(getUserColorSchemePreference());
@@ -20,7 +20,12 @@ function App() {
           {mode === "dark" ? "Light Mode" : "Dark Mode"}
         </button>
       </header>
-      <CountryGrid />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<CountryGrid />} />
+          <Route path="/:alpha3Code" element={<CountryDetail />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

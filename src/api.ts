@@ -59,13 +59,13 @@ export function useGetCountryList(filters?: CountryFilters): Country[] {
 // the `code` argument won't be tied to an input a user can type into,
 // we expect it to be part of the URL, therefore it's stable and we have to do
 // a lot less to handle user interactions.
-export function useGetCountryByCode(code: string): Country[] {
-  const [response, setResponse] = useState<Country[]>([]);
+export function useGetCountryByCode(code: string): Country | undefined {
+  const [response, setResponse] = useState<Country>();
 
   useEffect(() => {
     fetch(`/api/countries/${code}`).then(async (res) => {
-      const countries = (await res.json()) as Country[];
-      setResponse(countries);
+      const country = (await res.json()) as Country;
+      setResponse(country);
     });
   }, [code]);
 
