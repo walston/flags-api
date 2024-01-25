@@ -22,14 +22,17 @@ app.get("/api/countries", function getCountries(req, res, next) {
 
   // if we have a 'query.region' we'll filter, but otherwise, matches will remain the entire dataset
   if (req.query["region"]) {
-    const fuse = new Fuse(matches, { keys: ["region"] });
-    matches = fuse.search(req.query.region);
+    const fuse = new Fuse(matches, {
+      keys: ["region"],
+      threshold: 0,
+    });
+    matches = fuse.search(req.query.region).map((r) => r.item);
   }
 
   // similarly if we have a 'query.name' we'll further filter (or this could be our first filter if no region)
   if (req.query["name"]) {
-    const fuse = new Fuse(matches, { keys: ["name"] });
-    matches = fuse.search(req.query.name);
+    const fuse = new Fuse(matches, { keys: ["name"], threshold: 0.2 });
+    matches = fuse.search(req.query.name).map((r) => r.item);
   }
 
   // return the matches left. that could be all 250, a subset, or even 0 if no matches were found by fuse
