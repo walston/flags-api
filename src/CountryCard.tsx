@@ -3,6 +3,8 @@ import "./CountryCard.css";
 
 type Props = { country: Country };
 
+const formatter = Intl.NumberFormat("en-US");
+
 export default function CountryCard({ country }: Props) {
   return (
     <a className="CountryCard" href={`/country/${country.alpha3Code}`}>
@@ -13,7 +15,7 @@ export default function CountryCard({ country }: Props) {
         <h3>{country.name}</h3>
         <ul>
           <li>
-            <strong>population:</strong> {country.population}
+            <strong>population:</strong> {formatter.format(country.population)}
           </li>
           <li>
             <strong>region:</strong> {country.region}

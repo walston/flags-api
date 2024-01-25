@@ -1,0 +1,31 @@
+.App [role=toolbar] {
+  padding: 75px 75px 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.App [role=toolbar] input[type=search]::before {
+  content: ''
+}
+.App [role=toolbar] input[type=search] {
+  font-size: inherit;
+  padding: 20px 20px 20px 80px;
+}
+
+.App [role=toolbar] select {
+  padding: 20px;
+}
+
+.App [role=grid] {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 75px;
+  padding: 75px;
+}
+
+@media (max-width: 375px) {
+  .App [role=grid] {
+    grid-template-columns: 1fr;
+  }
+}
