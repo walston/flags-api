@@ -6,7 +6,9 @@ import { ColorScheme, getUserColorSchemePreference } from "./util";
 
 function App() {
   const [mode, setMode] = useState<ColorScheme>(getUserColorSchemePreference());
-  const countries = useGetCountryList();
+  const [name, setName] = useState("");
+  const [region, setRegion] = useState("");
+  const countries = useGetCountryList({ name, region });
   const regions = useMemo(() => {
     const set = countries.reduce((set, country) => {
       set.add(country.region);
@@ -19,7 +21,13 @@ function App() {
     <div className="App">
       <header>
         <h1>Where in the world?</h1>
-        <button>{mode === "dark" ? "Light Mode" : "Dark Mode"}</button>
+        <button
+          onClick={() =>
+            setMode((mode) => (mode === "dark" ? "light" : "dark"))
+          }
+        >
+          {mode === "dark" ? "Light Mode" : "Dark Mode"}
+        </button>
       </header>
 
       <div role="toolbar">
@@ -27,9 +35,11 @@ function App() {
           type="search"
           aria-label="Search for a country…"
           placeholder="Search for a country…"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
-        <select>
-          <option value="empty">Filter by Region</option>
+        <select value={region} onChange={(e) => setRegion(e.target.value)}>
+          <option value="">Filter by Region</option>
           {regions.map((region) => (
             <option value={region}>{region}</option>
           ))}
