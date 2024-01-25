@@ -1,21 +1,27 @@
-import { useMemo, useState } from "react";
-import { Country, useGetCountryList } from "./api";
+import { useState } from "react";
+import { useGetCountryList } from "./api";
+
 import CountryCard from "./CountryCard";
-import "./App.css";
 import { ColorScheme, getUserColorSchemePreference } from "./util";
+
+import "./App.css";
+
+const REGIONS = [
+  "Americas",
+  "Europe",
+  "Africa",
+  "Asia",
+  "Oceania",
+  "Polar",
+  "Antarctic Ocean",
+  "Antarctic",
+];
 
 function App() {
   const [mode, setMode] = useState<ColorScheme>(getUserColorSchemePreference());
   const [name, setName] = useState("");
   const [region, setRegion] = useState("");
   const countries = useGetCountryList({ name, region });
-  const regions = useMemo(() => {
-    const set = countries.reduce((set, country) => {
-      set.add(country.region);
-      return set;
-    }, new Set<Country["region"]>());
-    return [...set];
-  }, [countries]);
 
   return (
     <div className="App">
@@ -40,15 +46,15 @@ function App() {
         />
         <select value={region} onChange={(e) => setRegion(e.target.value)}>
           <option value="">Filter by Region</option>
-          {regions.map((region) => (
+          {REGIONS.map((region) => (
             <option value={region}>{region}</option>
           ))}
         </select>
       </div>
 
       <div role="grid">
-        {countries?.map((country) => {
-          return <CountryCard country={country} />;
+        {countries.map((country) => {
+          return <CountryCard country={country} key={country.alpha3Code} />;
         })}
       </div>
     </div>
