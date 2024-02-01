@@ -22,8 +22,8 @@ function App() {
       </header>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<CountryGrid />} />
-          <Route path="/:alpha3Code" element={<CountryDetail />} />
+          <Route path="" element={<CountryGrid />} />
+          <Route path=":alpha3Code" element={<CountryDetail />} />
         </Routes>
       </BrowserRouter>
     </div>
