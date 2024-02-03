@@ -59,12 +59,14 @@ export function useGetCountryList(filters?: CountryFilters): Country[] {
 // the `code` argument won't be tied to an input a user can type into,
 // we expect it to be part of the URL, therefore it's stable and we have to do
 // a lot less to handle user interactions.
-export function useGetCountryByCode(code: string): Country | undefined {
-  const [response, setResponse] = useState<Country>();
+export function useGetCountryByCode(
+  code: string
+): CountryWithExpandedBorders | undefined {
+  const [response, setResponse] = useState<CountryWithExpandedBorders>();
 
   useEffect(() => {
-    fetch(`/api/countries/${code}`).then(async (res) => {
-      const country = (await res.json()) as Country;
+    fetch(`/api/countries/${code}?expand=borders`).then(async (res) => {
+      const country = (await res.json()) as CountryWithExpandedBorders;
       setResponse(country);
     });
   }, [code]);
@@ -123,4 +125,8 @@ export type Country = {
   regionalBlocs: RegionalBlock[];
   cioc: string;
   independent: boolean;
+};
+
+export type CountryWithExpandedBorders = Omit<Country, "borders"> & {
+  borders?: Country[];
 };

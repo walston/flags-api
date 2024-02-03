@@ -8,7 +8,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "node server"
+    "dev": "nodemon server"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +52,7 @@
   "devDependencies": {
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.3"
   }
 }

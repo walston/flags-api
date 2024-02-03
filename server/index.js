@@ -40,6 +40,16 @@ app.get("/api/countries/:code", function getCountryByCode(req, res, next) {
     return res.status(404).send(`No country found matching ${countryCode}`);
   }
 
+  if ("expand" in req.query) {
+    const expanded = DATA.filter((borderer) =>
+      country.borders?.includes(borderer.alpha3Code)
+    );
+    return res.status(200).json({
+      ...country,
+      borders: expanded,
+    });
+  }
+
   return res.status(200).json(country);
 });
 
