@@ -2,7 +2,6 @@ const Express = require("express");
 const Fuse = require("fuse.js");
 const morgan = require("morgan");
 const DATA = require("./data.json");
-const { spawn } = require("child_process");
 
 const app = Express();
 
@@ -55,10 +54,4 @@ app.get("/api/countries/:code", function getCountryByCode(req, res, next) {
 
 app.listen(9001, () => {
   process.stdout.write("Flags API listening on 9001...");
-  const react = spawn("npm", ["start"]);
-  const kill_react = () => react.kill("SIGKILL");
-
-  react.stdout.pipe(process.stdout);
-  react.stderr.pipe(process.stderr);
-  process.addListener("beforeExit", kill_react);
 });
