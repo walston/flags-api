@@ -1,7 +1,9 @@
 import { useParams } from "react-router";
-import { useGetCountryByCode } from "./api";
+import { Country, useGetCountryByCode } from "./api";
 import { Link } from "react-router-dom";
 import "./CountryDetail.css";
+
+const format = Intl.NumberFormat("en-us");
 
 export default function CountryDetail() {
   const params = useParams<{ alpha3Code: string }>();
@@ -11,10 +13,12 @@ export default function CountryDetail() {
 
   return (
     <div className="CountryDetails">
-      <Link className="BackButton" to="/">
-        {" "}
-        ← Back{" "}
-      </Link>
+      <nav>
+        <Link className="button" to="/">
+          {" "}
+          ← Back{" "}
+        </Link>
+      </nav>
       <main>
         <picture className="flag">
           <img src={country.flags.svg} alt={`flag of ${country.name}`} />
@@ -26,7 +30,8 @@ export default function CountryDetail() {
               <strong>Native name:</strong> {country?.name}
             </li>
             <li>
-              <strong>Population:</strong> {country?.population}
+              <strong>Population:</strong>{" "}
+              {country?.population ? format.format(country.population) : "--"}
             </li>
             <li>
               <strong>Region:</strong> {country?.region}
@@ -49,22 +54,22 @@ export default function CountryDetail() {
               {country?.languages.map((lang) => lang.name).join()}
             </li>
           </ul>
+          <p>
+            <strong>Bordering countries:</strong>
+            {country?.borders?.map((borderer) => (
+              <BorderingCountry key={borderer.alpha3Code} country={borderer} />
+            ))}
+          </p>
         </section>
       </main>
-      <p>
-        <strong>Bordering countries:</strong>
-        {country?.borders?.map((code) => (
-          <BorderingCountry key={code} alpha3Code={code} />
-        ))}
-      </p>
     </div>
   );
 }
 
-function BorderingCountry({ alpha3Code }: { alpha3Code: string }) {
+function BorderingCountry({ country }: { country: Country }) {
   return (
-    <Link className="BorderingCountry" to={`/${alpha3Code}`}>
-      {alpha3Code}
+    <Link className="button" to={`/${country.alpha3Code}`}>
+      {country.name}
     </Link>
   );
 }

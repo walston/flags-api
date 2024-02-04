@@ -2,23 +2,37 @@
   padding: 75px 75px 0;
 }
 
-.BackButton {
+.button {
+  text-decoration: unset;
   display: inline-block;
-  padding: 0.5em 1em;;
+  padding: 0.5em 1em;
   background-color: var(--Elements);
   color: var(--Text);
   border-radius: 4px;
-  box-shadow: 0 1px 8px var(--Shadow);
+  box-shadow: 0 3px 5px var(--Shadow);
+  margin: 0.25em .5em;
+}
+
+.button:focus, .button:hover {
+  filter: brightness(1.2);
+}
+
+.button:active {
+  box-shadow: 0 2px 3px var(--Shadow);
 }
 
 .CountryDetails main {
-  columns: 2;
+  margin: 50px 0;
+  display: grid;
+  gap: 75px;
+  grid-template-columns: 1fr 1fr;
 }
 
 .CountryDetails .flag {
   display: block;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+  width: 100%;
   aspect-ratio: 30/17;
   background-color: var(--Background);
 }
@@ -30,9 +44,18 @@
   vertical-align: middle;
 }
 
+.CountryDetails h1 {
+  margin-top: 0 ;
+}
+
 .Statistics {
-  columns: 2;
   padding: 0;
+}
+
+@media (min-width: 1100px) {
+  .Statistics {
+    columns: 2;
+  }
 }
 
 .Statistics li {

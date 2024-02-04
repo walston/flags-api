@@ -37,9 +37,9 @@ export default function CountryGrid() {
       </div>
 
       <div role="grid">
-        {countries.map((country) => {
-          return <CountryCard country={country} key={country.alpha3Code} />;
-        })}
+        {countries.map((country) => (
+          <CountryCard country={country} key={country.alpha3Code} />
+        ))}
       </div>
     </>
   );
