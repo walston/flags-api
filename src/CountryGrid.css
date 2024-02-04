@@ -5,12 +5,21 @@
   justify-content: space-between;
 }
 
-.App [role=toolbar] input[type=search]::before {
-  content: ''
+.App [role=toolbar] :has(input[type=search]) {
+  position:relative;
 }
-.App [role=toolbar] input[type=search] {
+
+.App [role=toolbar] input[type=search] + svg {
+  position: absolute;
+  color: var(--Background);
+  top: 50%;
+  left: 1em;
+  transform: translateY(-50%)
+}
+
+.App [role=toolbar] input[type=search]  {
   font-size: inherit;
-  padding: 20px 20px 20px 80px;
+  padding: 20px 20px 20px 42px;
 }
 
 .App [role=toolbar] select {

@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { Country, useGetCountryByCode } from "./api";
 import { Link } from "react-router-dom";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import "./CountryDetail.css";
 
 const format = Intl.NumberFormat("en-us");
@@ -15,8 +16,7 @@ export default function CountryDetail() {
     <div className="CountryDetails">
       <nav>
         <Link className="button" to="/">
-          {" "}
-          ← Back{" "}
+          <ArrowLeftIcon height="0.75em" /> Back
         </Link>
       </nav>
       <main>

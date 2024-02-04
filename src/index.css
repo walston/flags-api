@@ -1,31 +1,27 @@
 body {
   margin: 0;
-  font-family: 'Nunito Sans';
+  font-family: "Nunito Sans";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--Background);
   color: var(--Text);
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    --Elements:  hsl(209, 23%, 22%);
-    --Background: hsl(207, 26%, 17%);
-    --Text: hsl(0, 0%, 100%);
-    --Shadow: hsl(200, 15%, 8%);
-  }
+body.dark {
+  --Elements: hsl(209, 23%, 22%);
+  --Background: hsl(207, 26%, 17%);
+  --Text: hsl(0, 0%, 100%);
+  --Shadow: hsl(200, 15%, 8%);
 }
 
-@media (prefers-color-scheme: light) {
-  body {
-    --Elements:  hsl(0, 0%, 100%);
-    --Background: hsl(0, 0%, 98%);
-    --Text: hsl(200, 15%, 8%);
-    --Shadow: hsl(209, 23%, 22%);
-  }
+body.light {
+  --Elements: hsl(0, 0%, 100%);
+  --Background: hsl(0, 0%, 98%);
+  --Text: hsl(200, 15%, 8%);
+  --Shadow: hsl(209, 23%, 22%);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

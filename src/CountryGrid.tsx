@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { useGetCountryList } from "./api";
 import CountryCard from "./CountryCard";
 import "./CountryGrid.css";
@@ -21,13 +22,16 @@ export default function CountryGrid() {
   return (
     <>
       <div role="toolbar">
-        <input
-          type="search"
-          aria-label="Search for a country…"
-          placeholder="Search for a country…"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <div>
+          <input
+            type="search"
+            aria-label="Search for a country…"
+            placeholder="Search for a country…"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <MagnifyingGlassIcon height="16px" />
+        </div>
         <select value={region} onChange={(e) => setRegion(e.target.value)}>
           <option value="">Filter by Region</option>
           {REGIONS.map((region) => (
